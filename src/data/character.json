@@ -1,0 +1,14 @@
+{
+	nationalDexId: 0,
+	name: "",
+	statTotal: 0,
+	imageUrl: "",
+	hp: 0,
+	attack: 0,
+	defense: 0,
+	specialAttack: 0,
+	specialDefense: 0,
+	speed: 0
+	types: [],
+	games: []
+}

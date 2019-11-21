@@ -1,0 +1,158 @@
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b2142"),
+	"gameId": "red-blue-yellow",
+    "name" : "Red/Blue/Yellow", 
+    "displayName" : "Red, Blue & Yellow", 
+    "regions" : [
+        "Kanto"
+    ], 
+    "order" : NumberInt(1), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b2143"),
+	"gameId": "gold-silver-crystal",
+    "name" : "Gold/Silver/Crystal", 
+    "displayName" : "Gold, Silver & Crystal", 
+    "regions" : [
+        "Johto", 
+        "Kanto"
+    ], 
+    "order" : NumberInt(2), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b2144"), 
+	"gameId": "ruby-sapphire-emerald",
+    "name" : "Ruby/Sapphire/Emerald", 
+    "displayName" : "Emerald, Ruby & Sapphire", 
+    "regions" : [
+        "Hoenn"
+    ], 
+    "order" : NumberInt(3), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b2145"), 
+	"gameId": "firered-leafgreen",
+    "name" : "FireRed/LeafGreen", 
+    "displayName" : "FireRed & LeafGreen", 
+    "regions" : [
+        "Kanto"
+    ], 
+    "order" : NumberInt(4), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b2146"), 
+	"gameId": "heartgold-soulsilver",
+    "name" : "HeartGold/SoulSilver", 
+    "displayName" : "HeartGold & SoulSilver", 
+    "regions" : [
+        "Johto", 
+        "Kanto", 
+        "Hoenn", 
+        "Sinnoh"
+    ], 
+    "order" : NumberInt(5), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b2147"), 
+	"gameId": "diamond-pearl",
+    "name" : "Diamond/Pearl", 
+    "displayName" : "Diamond & Pearl", 
+    "regions" : [
+        "Sinnoh"
+    ], 
+    "order" : NumberInt(6), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b2148"), 
+	"gameId": "platinum",
+    "name" : "Platinum", 
+    "displayName" : "Platinum", 
+    "regions" : [
+        "Sinnoh"
+    ], 
+    "order" : NumberInt(7), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b2149"), 
+	"gameId": "black-white",
+    "name" : "Black/White", 
+    "displayName" : "Black & White", 
+    "regions" : [
+        "Unova"
+    ], 
+    "order" : NumberInt(8), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b214a"), 
+	"gameId": "black2-white2",
+    "name" : "Black 2/White 2", 
+    "displayName" : "Black 2 & White 2", 
+    "regions" : [
+        "Unova"
+    ], 
+    "order" : NumberInt(9), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b214b"), 
+	"gameId": "x-y",
+    "name" : "X/Y", 
+    "displayName" : "X & Y", 
+    "regions" : [
+        "Kalos"
+    ], 
+    "order" : NumberInt(10), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b214c"), 
+	"gameId": "omegaruby-alphasapphire",
+    "name" : "Omega Ruby/Alpha Sapphire", 
+    "displayName" : "Omega Ruby & Alpha Sapphire", 
+    "regions" : [
+        "Hoenn"
+    ], 
+    "order" : NumberInt(11), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b214d"),
+	"gameId": "sun-moon",
+    "name" : "Sun/Moon", 
+    "displayName" : "Sun & Moon", 
+    "regions" : [
+        "Alola"
+    ], 
+    "order" : NumberInt(12), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b214e"), 
+	"gameId": "u.sun-u.moon",
+    "name" : "U.Sun/U.Moon", 
+    "displayName" : "Ultra Sun & Ultra Moon", 
+    "regions" : [
+        "Alola"
+    ], 
+    "order" : NumberInt(13), 
+    "imageUrl" : null
+}
+{ 
+    "_id" : ObjectId("5dc3d3b888897d334f4b214f"),
+	"gameId": "letsgopikachu-letsgoeevee",
+    "name" : "Let's Go Pikachu/Let's Go Eevee", 
+    "displayName" : "Let's Go Pikachu & Let's Go Eevee", 
+    "regions" : [
+        "Kanto"
+    ], 
+    "order" : NumberInt(14), 
+    "imageUrl" : null
+}
