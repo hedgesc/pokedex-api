@@ -1,10 +1,12 @@
 let express = require("express");
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
-
+let cors = require('cors');
 let app = express();
 
 let apiRoutes = require("./api-routes");
+
+app.use(cors());
 
 // Configure bodyparser to handle post requests
 app.use(bodyParser.urlencoded({
@@ -26,7 +28,7 @@ if(!db)
 else
     console.log("Db connected successfully")
 
-var port = 3001;
+var port = 3002;
 
 // Send message for default URL
 app.get('/', (req, res) => res.send('Hello World with Express'));

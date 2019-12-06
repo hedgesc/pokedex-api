@@ -11,7 +11,7 @@ var gameSchema = mongoose.Schema({
 });
 
 // Export Game model
-var Game = module.exports = mongoose.model('game', gameSchema);
+var Game = module.exports = mongoose.model('game', gameSchema, "games");
 
 module.exports.get = function (callback, sort) {
     Game.find(callback).sort(sort);

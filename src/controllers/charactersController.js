@@ -20,7 +20,10 @@ exports.index = function (req, res) {
     if(req.query.game) {
         Character.findByGameId(req.query.game, callback);
     }
+    else if(req.query.generation) {
+        Character.findByGeneration(req.query.generation, callback, { 'dexNumber': 1 });
+    }
     else {
-        Character.get(callback);
+        Character.get(callback, { 'dexNumber': 1 });
     }
 };

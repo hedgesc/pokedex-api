@@ -19,11 +19,13 @@ var characterSchema = mongoose.Schema({
     specialDefense: Number,
     speed: Number,
     imageUrl: String,
+    nameId: String,
+    generation: Number,
     games: [characterGameSchema]
 });
 
 // Export Character model
-var Character = module.exports = mongoose.model('character', characterSchema);
+var Character = module.exports = mongoose.model('character', characterSchema, "characters");
 
 module.exports.get = function (callback, sort) {
     Character.find(callback).sort(sort);
@@ -35,4 +37,8 @@ module.exports.findByGameId = function (game, callback) {
         { $match: { 'games.gameId': game } },
         { $sort: { 'games.gameDexId': 1 } }
     ], callback);
+}
+
+module.exports.findByGeneration = function (gen, callback, sort) {
+    Character.find({ 'generation': gen }, callback).sort(sort);
 }
