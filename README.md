@@ -1,7 +1,8 @@
 # pokedex-api
 A Node Express API for pokedex data
 
-`cd src/`
+## Run Express Server
+`node .\src\app.js`
 
-## commands
-`node app.js`
+## Expose Api
+`.\ngrok http 3002 -host-header="localhost:3002"`
