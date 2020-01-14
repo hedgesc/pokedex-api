@@ -1,8 +1,7 @@
 # pokedex-api
 A Node Express API for pokedex data
 
+`cd src/`
+
 ## commands
-```
-cd src/
-node app.js
-```
+`node app.js`
