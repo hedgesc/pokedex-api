@@ -6,7 +6,7 @@ let app = express();
 
 let apiRoutes = require("./api-routes");
 
-app.use(cors());
+app.use(cors({'origin': '*'}));
 
 // Configure bodyparser to handle post requests
 app.use(bodyParser.urlencoded({

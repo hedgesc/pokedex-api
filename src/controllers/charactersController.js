@@ -27,3 +27,36 @@ exports.index = function (req, res) {
         Character.get(callback, { 'dexNumber': 1 });
     }
 };
+
+exports.view = function (req, res) {
+    if(req.query.previous) {
+        Character.findPreviousOne(req.params.id, function(err, character) {
+            if (err)
+                res.send(err);
+            res.json({
+                message: 'Character details loading..',
+                data: character
+            });
+        });
+    }
+    else if(req.query.next) {
+        Character.findNextOne(req.params.id, function(err, character) {
+            if (err)
+                res.send(err);
+            res.json({
+                message: 'Character details loading..',
+                data: character
+            });
+        });
+    }
+    else {
+        Character.findById(req.params.id, function (err, character) {
+            if (err)
+                res.send(err);
+            res.json({
+                message: 'Character details loading..',
+                data: character
+            });
+        });
+    }
+};

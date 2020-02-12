@@ -5,28 +5,31 @@ var movePreviewSchema = mongoose.Schema({
     moveId: String,
     name: String,
     isSuggested: Boolean,
+    type: String,
     color: String,
     power: Number,
-    accuracy: Number
+    accuracy: Number,
+    pp: Number
 });
 
 var characterMoveSchema = mongoose.Schema({
+    generation: Number,
     nameId: String,
     name: String,
-    charIndex: Number,
-    gameId: String,
-    game: String,
-    gameIndex: Number
-    //moves: [movePreviewSchema]
+    moves: [movePreviewSchema]
 });
 
 // Export Character model
 var CharacterMove = module.exports = mongoose.model('character_move', characterMoveSchema, "character_moves");
 
-module.exports.get = function (callback, sort) {
-    CharacterMove.find(callback).sort(sort)
+module.exports.get = function (conditions, callback, sort) {
+    CharacterMove.find(conditions, callback).sort(sort)
 }
 
-module.exports.findById = function (conditions, callback, sort) {
-    CharacterMove.find(conditions, callback).sort(sort)
+module.exports.findById = function (id, callback) {
+    CharacterMove.findOne({ '_id': id }, callback);
+}
+
+module.exports.update = function (id, updates, callback) {
+    CharacterMove.updateOne({ '_id': id }, updates, callback)
 }
