@@ -49,7 +49,7 @@ app.put('/characters/:id', api.updateCharacter)
 app.put('/games/:id', api.updateGame)
 app.put('/moves/:id', api.updateMove)
 app.put('/game-groups/:id', api.updateGameGroup)
-// app.put('/characters/:id/games/:id1', api.updateGameCharacter)
+app.put('/characters/:id/games/:id1', api.updateGameCharacter)
 // app.put('/characters/:id/moves/:id1', api.updateCharacterMove)
 
 // All delete requests

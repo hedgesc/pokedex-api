@@ -295,6 +295,32 @@ const updateGameGroup = (request, response) => {
   })
 }
 
+const updateGameCharacter = (request, response) => {
+  const sql = 'UPDATE character_games SET generation = $3, game_character_id = $4 WHERE character_id = $1 AND game_id = $2'
+  const characterId = parseInt(request.params.id)
+  const gameId = parseInt(request.params.id1)
+  const { generation, game_character_id} = request.body
+  const params = [characterId, gameId, generation, game_character_id]
+
+  pool.query(sql, params, (error, results) => {
+    if(error) handleError(error)
+    response.status(200).send(`Game ${gameId} updated for Character ${characterId}`)
+  })
+}
+
+const updateCharacterMove = (request, response) => {
+  const sql = 'UPDATE character_moves SET generation = $3, is_suggested = $4 WHERE character_id = $1 AND move_id = $2'
+  const characterId = parseInt(request.params.id)
+  const moveId = parseInt(request.params.id1)
+  const { generation, is_suggested } = request.body
+  const params = [characterId, moveId, generation, is_suggested]
+
+  pool.query(sql, params, (error, results) => {
+    if(error) handleError(error)
+    response.status(200).send(`Move ${moveId} updated for Character ${characterId}`)
+  })
+}
+
 const deleteCharacter = (request, response) => {
   const sql = 'DELETE FROM characters WHERE character_id = $1'
   const id = parseInt(request.params.id)
@@ -391,7 +417,7 @@ module.exports = {
   updateGame,
   updateMove,
   updateGameGroup,
-  // updateGameCharacter,
+  updateGameCharacter,
   // updateCharacterMove,
   deleteCharacter,
   deleteGame,
