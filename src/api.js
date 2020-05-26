@@ -13,8 +13,13 @@ const handleError = (err) => {
   throw err
 }
 
-const handleResponse = (response, results) => {
+const handleListResponse = (response, results) => {
   response.status(200).json(results.rows)
+}
+
+const handleSingleResponse = (response, results) => {
+  const row = results.rows.length === 0 ? null : results.rows[0]
+  response.status(200).json(row)
 }
 
 const createCharacter = (request, response) => {
@@ -121,7 +126,7 @@ const getCharacters = (request, response) => {
 
   pool.query(sql, [limit, offset], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleListResponse(response, results)
   })
 }
 
@@ -131,7 +136,7 @@ const getCharacterById = (request, response) => {
 
   pool.query(sql, [id], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleSingleResponse(response, results)
   })
 }
 
@@ -141,7 +146,7 @@ const getGamesByCharacterId = (request, response) => {
 
   pool.query(sql, [id], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleListResponse(response, results)
   })
 }
 
@@ -152,7 +157,7 @@ const getGameCharacterByCharacterId_GameId = (request, response) => {
 
   pool.query(sql, [characterId, gameId], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleSingleResponse(response, results)
   })
 }
 
@@ -162,7 +167,7 @@ const getGameCharacterById = (request, response) => {
 
   pool.query(sql, [id], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleSingleResponse(response, results)
   })
 }
 
@@ -172,7 +177,7 @@ const getMovesByCharacterId = (request, response) => {
 
   pool.query(sql, [id], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleListResponse(response, results)
   })
 }
 
@@ -183,7 +188,7 @@ const getCharacterMoveByCharacterId_MoveId = (request, response) => {
 
   pool.query(sql, [characterId, moveId], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleSingleResponse(response, results)
   })
 }
 
@@ -193,7 +198,7 @@ const getCharacterMoveById = (request, response) => {
 
   pool.query(sql, [id], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleSingleResponse(response, results)
   })
 }
 
@@ -202,7 +207,7 @@ const getGames = (request, response) => {
   
   pool.query(sql, (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleListResponse(response, results)
   })
 }
 
@@ -212,7 +217,7 @@ const getGameById = (request, response) => {
 
   pool.query(sql, [id], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleSingleResponse(response, results)
   })
 }
 
@@ -223,7 +228,7 @@ const getMoves = (request, response) => {
 
   pool.query(sql, [limit, offset], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleListResponse(response, results)
   })
 }
 
@@ -233,7 +238,7 @@ const getMoveById = (request, response) => {
 
   pool.query(sql, [id], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleSingleResponse(response, results)
   })
 }
 
@@ -242,7 +247,7 @@ const getGameGroups = (request, response) => {
   
   pool.query(sql, (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleListResponse(response, results)
   })
 }
 
@@ -252,7 +257,7 @@ const getGameGroupById = (request, response) => {
 
   pool.query(sql, [id], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleSingleResponse(response, results)
   })
 }
 
@@ -262,7 +267,7 @@ const getGamesByGameGroupId = (request, response) => {
 
   pool.query(sql, [id], (error, results) => {
     if (error) handleError(error)
-    handleResponse(response, results)
+    handleListResponse(response, results)
   })
 }
 

@@ -6,7 +6,7 @@ const app = express()
 const api = require('./api')
 const port = 3002
 
-app.use(cors({'origin': '*'}))
+app.use(cors())
 
 // Configure bodyparser to handle post requests
 app.use(bodyParser.urlencoded({
