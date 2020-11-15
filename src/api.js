@@ -1,5 +1,6 @@
 const Pool = require('pg').Pool
 const db = require('./queries')
+var _ = require('lodash')
 
 const pool = new Pool({
   user: 'postgres',
@@ -22,12 +23,28 @@ const handleSingleResponse = (response, results) => {
   response.status(200).json(row)
 }
 
+const handlePagedListResponse = (response, results, last_row) => {
+  let result = {
+    items: [],
+    total_count: 0,
+    has_more: false
+  }
+
+  if(results.rows.length > 0) {
+    result.total_count = _.parseInt(results.rows[0]['total_count'])
+    result.items = _.map(results.rows, (obj) => { return _.omit(obj, ['total_count']) })
+    result.has_more = result.total_count > last_row
+  }
+
+  response.status(200).json(result)
+}
+
 const createCharacter = (request, response) => {
   const sql = 'INSERT INTO characters \
   (character_id, name_id, name, hp, attack, defense, \
   special_attack, special_defense, speed, total, image_url, \
   evolves_from_id, generation, types) VALUES ($1, $2, $3, $4, \
-  $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)'
+  $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING character_id'
   
   const { 
     character_id, name_id, name, hp, attack, defense, 
@@ -120,14 +137,26 @@ const createGameGroupGame = (request, response) => {
 }
 
 const getCharacters = (request, response) => {
-  const sql = 'SELECT * FROM characters ORDER BY character_id ASC LIMIT $1 OFFSET $2'
-  limit = request.query.limit ? request.query.limit : 10
-  offset = request.query.offset ? request.query.offset : 0
-
-  pool.query(sql, [limit, offset], (error, results) => {
-    if (error) handleError(error)
-    handleListResponse(response, results)
-  })
+  let sql
+  
+  if(!request.query.limit && !request.query.offset) {
+    sql = 'SELECT character_id, name, image_url FROM characters'
+    pool.query(sql, (error, results) => {
+      if (error) handleError(error)
+      handleListResponse(response, results)
+    })
+  }
+  else {
+    const limit = request.query.limit ? request.query.limit : '10'
+    const offset = request.query.offset ? request.query.offset : '0'
+    sql = 'WITH cte AS (SELECT * FROM characters) SELECT * FROM (TABLE cte ORDER BY character_id ASC LIMIT $1 OFFSET $2) sub RIGHT JOIN (SELECT count(*) FROM cte) c(total_count) ON true;'
+    
+    pool.query(sql, [limit, offset], (error, results) => {
+      if (error) handleError(error)
+      const last_row = _.parseInt(limit) + _.parseInt(offset)
+      handlePagedListResponse(response, results, last_row)
+    })
+  }
 }
 
 const getCharacterById = (request, response) => {
@@ -141,7 +170,7 @@ const getCharacterById = (request, response) => {
 }
 
 const getGamesByCharacterId = (request, response) => {
-  const sql = 'SELECT g.* FROM character_games cg JOIN games g on cg.game_id = g.game_id WHERE cg.character_id = $1'
+  const sql = 'SELECT cg.character_game_id, cg.generation, cg.character_id, cg.game_character_id, g.game_id, g.name_id, g.name FROM character_games cg JOIN games g on cg.game_id = g.game_id WHERE cg.character_id = $1'
   const id = parseInt(request.params.id)
 
   pool.query(sql, [id], (error, results) => {
@@ -222,13 +251,15 @@ const getGameById = (request, response) => {
 }
 
 const getMoves = (request, response) => {
-  const sql = 'SELECT * FROM moves ORDER BY move_id ASC LIMIT $1 OFFSET $2'
-  limit = request.query.limit ? request.query.limit : 10
-  offset = request.query.offset ? request.query.offset : 0
+  const sql = 'WITH cte AS (SELECT * FROM moves) SELECT * FROM (TABLE cte ORDER BY move_id ASC LIMIT $1 OFFSET $2) sub RIGHT JOIN (SELECT count(*) FROM cte) c(total_count) ON true;'
+  
+  const limit = request.query.limit ? request.query.limit : '10'
+  const offset = request.query.offset ? request.query.offset : '0'
 
   pool.query(sql, [limit, offset], (error, results) => {
     if (error) handleError(error)
-    handleListResponse(response, results)
+    const last_row = _.parseInt(limit) + _.parseInt(offset)
+    handlePagedListResponse(response, results, last_row)
   })
 }
 
@@ -468,6 +499,24 @@ const deleteGameGroupGame = (request, response) => {
   pool.query(sql, [gameGroupId, gameId], (error, results) => {
     if (error) handleError(error)
     response.status(200).send(`Game ${gameId} deleted from Game Group ${gameGroupId}`)
+  })
+}
+
+const countCharacters = (request, response) => {
+  const sql = 'SELECT COUNT(*) FROM characters'
+
+  pool.query(sql, (error, results) => {
+    if (error) handleError(error)
+    handleSingleResponse(response, results)
+  })
+}
+
+const countMoves = (request, response) => {
+  const sql = 'SELECT COUNT(*) FROM moves'
+
+  pool.query(sql, (error, results) => {
+    if (error) handleError(error)
+    handleSingleResponse(response, results)
   })
 }
 
