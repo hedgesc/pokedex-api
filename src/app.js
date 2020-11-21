@@ -51,7 +51,6 @@ app.get('/character-moves/:id', api.getCharacterMoveById)
 // All update requests
 app.put('/characters/:id', api.updateCharacter)
 app.put('/characters/:id/games/:id1', api.updateGameCharacterByCharacterId_GameId)
-app.put('/characters/:id/moves/:id1', api.updateCharacterMoveByCharacterId_MoveId)
 app.put('/games/:id', api.updateGame)
 app.put('/moves/:id', api.updateMove)
 app.put('/game-groups/:id', api.updateGameGroup)
