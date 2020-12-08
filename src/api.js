@@ -1,10 +1,17 @@
 const Pool = require('pg').Pool
-const db = require('./queries')
 var _ = require('lodash')
 
+// const pool = new Pool({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'pokedex',
+//   password: 'Super*32',
+//   port: 5432
+// })
+
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
+  user: 'pi',
+  host: '10.0.0.42',
   database: 'pokedex',
   password: 'Super*32',
   port: 5432
@@ -305,6 +312,42 @@ const getGamesByGameGroupId = (request, response) => {
   })
 }
 
+const getCharactersByGameGroupId = (request, response) => {
+  const sql = `
+    SELECT DISTINCT
+      c.character_id,
+      c.name_id,
+      c.name,
+      c.hp,
+      c.attack,
+      c.defense,
+      c.special_attack,
+      c.special_defense,
+      c.speed,
+      c.total,
+      c.image_url,
+      c.generation,
+      c.evolves_from_id,
+      c.types
+    FROM
+	    game_group_games g3
+	    JOIN character_games c2
+		    ON g3.game_id = c2.game_id
+	    JOIN characters c
+		    ON c2.character_id = c.character_id
+    WHERE
+	    g3.game_group_id = $1
+    ORDER BY
+      c.character_id ASC;`
+
+  const id = parseInt(request.params.id)
+
+  pool.query(sql, [id], (error, results) => {
+    if (error) handleError(error)
+    handleListResponse(response, results)
+  })
+}
+
 const updateCharacter = (request, response) => {
   const sql = 'UPDATE characters SET name_id = $2, name = $3, hp = $4, \
   attack = $5, defense = $6, special_attack = $7, special_defense = $8, \
@@ -533,6 +576,7 @@ module.exports = {
   getGameGroups,
   getGameGroupById,
   getGamesByGameGroupId,
+  getCharactersByGameGroupId,
   updateCharacter,
   updateGame,
   updateMove,

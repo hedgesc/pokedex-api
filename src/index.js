@@ -45,6 +45,7 @@ app.get('/moves/:id', api.getMoveById)
 app.get('/game-groups', api.getGameGroups)
 app.get('/game-groups/:id', api.getGameGroupById)
 app.get('/game-groups/:id/games', api.getGamesByGameGroupId)
+app.get('/game-groups/:id/characters', api.getCharactersByGameGroupId)
 app.get('/character-games/:id', api.getGameCharacterById)
 app.get('/character-moves/:id', api.getCharacterMoveById)
 
