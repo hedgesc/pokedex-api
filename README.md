@@ -1,8 +1,11 @@
 # pokedex-api
 A Node Express API for pokedex data
 
+## Build dist
+`npn run build`
+
 ## Run Express Server
-`node .\src\app.js`
+`npn start`
 
 ## Expose Api
-`.\ngrok http 3002 -host-header="localhost:3002"`
+`.\ngrok http 3000 -host-header="localhost:3002"`
