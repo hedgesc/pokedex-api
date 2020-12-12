@@ -1,21 +1,21 @@
 const Pool = require('pg').Pool
 var _ = require('lodash')
 
-const pool = new Pool({
-  user: 'pi',
-  host: 'localhost',
-  database: 'pokedex',
-  password: 'Super*32',
-  port: 5432
-})
-
 // const pool = new Pool({
 //   user: 'pi',
-//   host: '10.0.0.42',
+//   host: 'localhost',
 //   database: 'pokedex',
 //   password: 'Super*32',
 //   port: 5432
 // })
+
+const pool = new Pool({
+  user: 'pi',
+  host: '10.0.0.42',
+  database: 'pokedex',
+  password: 'Super*32',
+  port: 5432
+})
 
 const handleError = (err) => {
   throw err
@@ -315,7 +315,7 @@ const getGamesByGameGroupId = (request, response) => {
 const getCharactersByGameGroupId = (request, response) => {
   const sql = `
     SELECT DISTINCT
-      c.character_id,,
+      c.character_id,
       c2.game_character_id,
       c.name_id,
       c.name,
