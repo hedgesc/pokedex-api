@@ -315,7 +315,8 @@ const getGamesByGameGroupId = (request, response) => {
 const getCharactersByGameGroupId = (request, response) => {
   const sql = `
     SELECT DISTINCT
-      c.character_id,
+      c.character_id,,
+      c2.game_character_id,
       c.name_id,
       c.name,
       c.hp,
@@ -338,7 +339,7 @@ const getCharactersByGameGroupId = (request, response) => {
     WHERE
 	    g3.game_group_id = $1
     ORDER BY
-      c.character_id ASC;`
+      c2.game_character_id ASC;`
 
   const id = parseInt(request.params.id)
 
