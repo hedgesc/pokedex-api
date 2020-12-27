@@ -11,11 +11,19 @@ const pool = new Pool({
 
 // const pool = new Pool({
 //   user: 'pi',
-//   host: '10.0.0.42',
+//   host: 'localhost',
 //   database: 'pokedex',
 //   password: 'Super*32',
 //   port: 5432
 // })
+
+const pool = new Pool({
+  user: 'pi',
+  host: '10.0.0.42',
+  database: 'pokedex',
+  password: 'Super*32',
+  port: 5432
+})
 
 const handleError = (err) => {
   throw err
@@ -334,6 +342,7 @@ const getCharactersByGameGroupId = (request, response) => {
   const sql = `
     SELECT DISTINCT
       c.character_id,
+      c2.game_character_id,
       c.name_id,
       c.name,
       c.hp,
@@ -356,7 +365,7 @@ const getCharactersByGameGroupId = (request, response) => {
     WHERE
 	    g3.game_group_id = $1
     ORDER BY
-      c.character_id ASC;`
+      c2.game_character_id ASC;`
 
   const id = parseInt(request.params.id)
 
