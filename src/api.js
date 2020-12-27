@@ -2,7 +2,7 @@ const Pool = require('pg').Pool
 var _ = require('lodash')
 
 const pool = new Pool({
-  user: 'pi',
+  user: 'postgres',
   host: 'localhost',
   database: 'pokedex',
   password: 'Super*32',
@@ -93,7 +93,9 @@ const createMove = (request, response) => {
 }
 
 const createGameGroup = (request, response) => {
-  const sql = 'INSERT INTO game_groups (name_id, name, alternate_name) VALUES ($1, $2, $3) RETURNING game_group_id'
+  const sql = 'INSERT INTO game_groups \
+  (name_id, name, alternate_name, generation) \
+  VALUES ($1, $2, $3, $4) RETURNING game_group_id'
   const { name_id, name, alternate_name } = request.body
   const params = [name_id, name, alternate_name]
 
@@ -177,7 +179,10 @@ const getCharacterById = (request, response) => {
 }
 
 const getGamesByCharacterId = (request, response) => {
-  const sql = 'SELECT cg.character_game_id, cg.generation, cg.character_id, cg.game_character_id, g.game_id, g.name_id, g.name FROM character_games cg JOIN games g on cg.game_id = g.game_id WHERE cg.character_id = $1'
+  const sql = 'SELECT cg.character_game_id, cg.generation, cg.character_id, \
+  cg.game_character_id, g.game_id, g.name_id, g.name \
+  FROM character_games cg JOIN games g on cg.game_id = g.game_id \
+  WHERE cg.character_id = $1'
   const id = parseInt(request.params.id)
 
   pool.query(sql, [id], (error, results) => {
@@ -208,16 +213,29 @@ const getGameCharacterById = (request, response) => {
 }
 
 const getMovesByCharacterId = (request, response) => {
-  const sql = 'SELECT cm.character_id, cm.character_move_id, cm.generation, cm.is_suggested, \
-	  m.move_id, m.name, m.power, m.accuracy, m.pp, m.type \
+  let sql = 'SELECT cm.character_id, cm.character_move_id, cm.generation, cm.is_suggested, \
+  m.move_id, m.name, m.power, m.accuracy, m.pp, m.type \
   FROM character_moves cm JOIN moves m on cm.move_id = m.move_id \
-  WHERE cm.character_id = $1 ORDER BY cm.character_move_id'
+  WHERE cm.character_id = $1 '
+
   const id = parseInt(request.params.id)
 
-  pool.query(sql, [id], (error, results) => {
-    if (error) handleError(error)
-    handleListResponse(response, results)
-  })
+  if(request.query.gen) {
+    sql += 'AND cm.generation = $2 ORDER BY cm.character_move_id'
+    const gen = request.query.gen
+
+    pool.query(sql, [id, gen], (error, results) => {
+      if (error) handleError(error)
+      handleListResponse(response, results)
+    })
+  } else {
+    sql += 'ORDER BY cm.character_move_id'
+
+    pool.query(sql, [id], (error, results) => {
+      if (error) handleError(error)
+      handleListResponse(response, results)
+    })
+  }
 }
 
 const getCharacterMoveByCharacterId_MoveId = (request, response) => {
@@ -394,7 +412,9 @@ const updateMove = (request, response) => {
 }
 
 const updateGameGroup = (request, response) => {
-  const sql = 'UPDATE game_groups SET name_id = $2, name = $3, alternate_name = $4 WHERE game_group_id = $1'
+  const sql = 'UPDATE game_groups \
+  SET name_id = $2, name = $3, alternate_name = $4, generation = $5 \
+  WHERE game_group_id = $1'
   const id = parseInt(request.params.id)
   const { name_id, name, alternate_name } = request.body
   const params = [id, name_id, name, alternate_name]
