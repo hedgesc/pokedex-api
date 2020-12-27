@@ -1,16 +1,8 @@
 const Pool = require('pg').Pool
 var _ = require('lodash')
 
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'pokedex',
-  password: 'Super*32',
-  port: 5432
-})
-
 // const pool = new Pool({
-//   user: 'pi',
+//   user: 'postgres',
 //   host: 'localhost',
 //   database: 'pokedex',
 //   password: 'Super*32',
@@ -104,8 +96,8 @@ const createGameGroup = (request, response) => {
   const sql = 'INSERT INTO game_groups \
   (name_id, name, alternate_name, generation) \
   VALUES ($1, $2, $3, $4) RETURNING game_group_id'
-  const { name_id, name, alternate_name } = request.body
-  const params = [name_id, name, alternate_name]
+  const { name_id, name, alternate_name, generation } = request.body
+  const params = [name_id, name, alternate_name, generation]
 
   pool.query(sql, params, (error, results) => {
     if (error) handleError(error)
@@ -425,8 +417,8 @@ const updateGameGroup = (request, response) => {
   SET name_id = $2, name = $3, alternate_name = $4, generation = $5 \
   WHERE game_group_id = $1'
   const id = parseInt(request.params.id)
-  const { name_id, name, alternate_name } = request.body
-  const params = [id, name_id, name, alternate_name]
+  const { name_id, name, alternate_name, generation } = request.body
+  const params = [id, name_id, name, alternate_name, generation]
 
   pool.query(sql, params, (error, results) => {
     if (error) handleError(error)
