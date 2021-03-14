@@ -4,7 +4,7 @@ const cors = require('cors')
 
 const app = express()
 
-const api = require('./api')
+const api = require('./__api')
 const port = 3000
 
 app.use(cors())
