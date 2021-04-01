@@ -27,22 +27,10 @@ const remove = async (req, res) => {
   res.status(200).send(`${resource} ${result.id} deleted`)
 }
 
-const games = async (req, res) => {
-  const result = await service.games(req.params.id)
-  res.status(200).json(result)
-}
-
-const characters = async (req, res) => {
-  const result = await service.characters(req.params.id)
-  res.status(200).json(result)
-}
-
 export default {
   list,
   create,
   get,
   update,
-  remove,
-  games,
-  characters
+  remove
 }

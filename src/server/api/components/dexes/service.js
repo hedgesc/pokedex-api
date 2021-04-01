@@ -30,20 +30,10 @@ const update = async (id, model) => {
   return { id: result }
 }
 
-const games = async (id) => {
-  return await store.games(parseInt(id))
-}
-
-const characters = async (id) => {
-  return await store.characters(parseInt(id))
-}
-
 export default {
   create,
   get,
   remove,
   list,
-  update,
-  games,
-  characters
+  update
 }

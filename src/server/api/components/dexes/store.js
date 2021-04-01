@@ -49,26 +49,10 @@ const update = async (id, dex) => {
   return id
 }
 
-const games = async (id) => {
-  const sql = 'SELECT * FROM dex_games WHERE dex_id = $1'
-  const res = await pool.query(sql, [id])
-  return res.rows
-}
-
-const characters = async (id) => {
-  const sql = 'SELECT c.* FROM dexes_characters dc \
-  JOIN characters c ON dc.character_id = c.character_id \
-  WHERE dc.dex_id = $1'
-  const res = await pool.query(sql, [id])
-  return res.rows
-}
-
 export default {
   create,
   get,
   remove,
   list,
-  update,
-  games,
-  characters
+  update
 }
