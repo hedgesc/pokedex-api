@@ -150,67 +150,11 @@ var remove = /*#__PURE__*/function () {
   };
 }();
 
-var games = /*#__PURE__*/function () {
-  var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
-    var result;
-    return _regenerator["default"].wrap(function _callee6$(_context6) {
-      while (1) {
-        switch (_context6.prev = _context6.next) {
-          case 0:
-            _context6.next = 2;
-            return _service["default"].games(req.params.id);
-
-          case 2:
-            result = _context6.sent;
-            res.status(200).json(result);
-
-          case 4:
-          case "end":
-            return _context6.stop();
-        }
-      }
-    }, _callee6);
-  }));
-
-  return function games(_x11, _x12) {
-    return _ref6.apply(this, arguments);
-  };
-}();
-
-var characters = /*#__PURE__*/function () {
-  var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res) {
-    var result;
-    return _regenerator["default"].wrap(function _callee7$(_context7) {
-      while (1) {
-        switch (_context7.prev = _context7.next) {
-          case 0:
-            _context7.next = 2;
-            return _service["default"].characters(req.params.id);
-
-          case 2:
-            result = _context7.sent;
-            res.status(200).json(result);
-
-          case 4:
-          case "end":
-            return _context7.stop();
-        }
-      }
-    }, _callee7);
-  }));
-
-  return function characters(_x13, _x14) {
-    return _ref7.apply(this, arguments);
-  };
-}();
-
 var _default = {
   list: list,
   create: create,
   get: get,
   update: update,
-  remove: remove,
-  games: games,
-  characters: characters
+  remove: remove
 };
 exports["default"] = _default;

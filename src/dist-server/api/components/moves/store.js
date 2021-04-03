@@ -17,7 +17,7 @@ var _config = _interopRequireDefault(require("../../../config/config"));
 
 var _lodash = _interopRequireDefault(require("lodash"));
 
-var pool = new _pg.Pool(_config["default"].postgres);
+var pool = new _pg.Pool(_config["default"].db);
 
 var create = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(move) {

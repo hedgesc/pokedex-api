@@ -1,5 +1,5 @@
 import { Pool } from 'pg'
-import config from '@/config/config'
+import config from '../../../../config/config'
 import _ from 'lodash'
 
 const pool = new Pool(config.db)

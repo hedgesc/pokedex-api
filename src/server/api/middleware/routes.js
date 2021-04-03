@@ -1,14 +1,16 @@
 const dexIdMiddleware = (req, res, next) => {
-    req.dexId = req.params.id;
-    next()
+  console.log('dexId:middleware:', req.params)
+  req.dexId = req.params.id;
+  next()
 }
 
 const characterIdMiddleware = (req, res, next) => {
-    req.characterId = req.params.id
-    next()
+  console.log('characterId:middleware:', req.params)
+  req.characterId = req.params.characterId
+  next()
 }
 
-export default {
-    dexIdMiddleware,
-    characterIdMiddleware
+export {
+  dexIdMiddleware,
+  characterIdMiddleware
 }

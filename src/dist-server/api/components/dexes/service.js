@@ -153,63 +153,11 @@ var update = /*#__PURE__*/function () {
   };
 }();
 
-var games = /*#__PURE__*/function () {
-  var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(id) {
-    return _regenerator["default"].wrap(function _callee6$(_context6) {
-      while (1) {
-        switch (_context6.prev = _context6.next) {
-          case 0:
-            _context6.next = 2;
-            return _store["default"].games(parseInt(id));
-
-          case 2:
-            return _context6.abrupt("return", _context6.sent);
-
-          case 3:
-          case "end":
-            return _context6.stop();
-        }
-      }
-    }, _callee6);
-  }));
-
-  return function games(_x6) {
-    return _ref6.apply(this, arguments);
-  };
-}();
-
-var characters = /*#__PURE__*/function () {
-  var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(id) {
-    return _regenerator["default"].wrap(function _callee7$(_context7) {
-      while (1) {
-        switch (_context7.prev = _context7.next) {
-          case 0:
-            _context7.next = 2;
-            return _store["default"].characters(parseInt(id));
-
-          case 2:
-            return _context7.abrupt("return", _context7.sent);
-
-          case 3:
-          case "end":
-            return _context7.stop();
-        }
-      }
-    }, _callee7);
-  }));
-
-  return function characters(_x7) {
-    return _ref7.apply(this, arguments);
-  };
-}();
-
 var _default = {
   create: create,
   get: get,
   remove: remove,
   list: list,
-  update: update,
-  games: games,
-  characters: characters
+  update: update
 };
 exports["default"] = _default;

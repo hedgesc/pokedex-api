@@ -12,7 +12,7 @@ router.get('/:id', controller.get)
 router.put('/:id', controller.update)
 router.delete('/:id', controller.remove)
 
-router.use(':id/games', dexIdMiddleware, dexGamesRouter)
+router.use('/:id/games', dexIdMiddleware, dexGamesRouter)
 
 router.use('/:id/characters', dexIdMiddleware, dexCharactersRouter)
 

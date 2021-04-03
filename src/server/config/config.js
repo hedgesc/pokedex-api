@@ -1,4 +1,6 @@
-const env = process.env.NODE_ENV; // 'development' or 'production'
+const env = process.env.NODE_ENV || 'development' // 'development' or 'production'
+
+// const config = require(`./${env.trim()}.js`).default
 
 const development = {
   app: {
@@ -21,7 +23,7 @@ const production = {
     "user": "postgres",
     "password": "Super*32",
     "database": "pokemondb",
-    "host": "postgres",
+    "host": "127.0.0.1",
     "port": "5432"
   }
 }

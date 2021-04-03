@@ -17,7 +17,7 @@ var _config = _interopRequireDefault(require("../../../config/config"));
 
 var _lodash = _interopRequireDefault(require("lodash"));
 
-var pool = new _pg.Pool(_config["default"].postgres);
+var pool = new _pg.Pool(_config["default"].db);
 
 var create = /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(dex) {
@@ -163,71 +163,11 @@ var update = /*#__PURE__*/function () {
   };
 }();
 
-var games = /*#__PURE__*/function () {
-  var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(id) {
-    var sql, res;
-    return _regenerator["default"].wrap(function _callee6$(_context6) {
-      while (1) {
-        switch (_context6.prev = _context6.next) {
-          case 0:
-            sql = 'SELECT * FROM dex_games WHERE dex_id = $1';
-            _context6.next = 3;
-            return pool.query(sql, [id]);
-
-          case 3:
-            res = _context6.sent;
-            return _context6.abrupt("return", res.rows);
-
-          case 5:
-          case "end":
-            return _context6.stop();
-        }
-      }
-    }, _callee6);
-  }));
-
-  return function games(_x6) {
-    return _ref6.apply(this, arguments);
-  };
-}();
-
-var characters = /*#__PURE__*/function () {
-  var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(id) {
-    var sql, res;
-    return _regenerator["default"].wrap(function _callee7$(_context7) {
-      while (1) {
-        switch (_context7.prev = _context7.next) {
-          case 0:
-            sql = 'SELECT c.* FROM dexes_characters dc \
-  JOIN characters c ON dc.character_id = c.character_id \
-  WHERE dc.dex_id = $1';
-            _context7.next = 3;
-            return pool.query(sql, [id]);
-
-          case 3:
-            res = _context7.sent;
-            return _context7.abrupt("return", res.rows);
-
-          case 5:
-          case "end":
-            return _context7.stop();
-        }
-      }
-    }, _callee7);
-  }));
-
-  return function characters(_x7) {
-    return _ref7.apply(this, arguments);
-  };
-}();
-
 var _default = {
   create: create,
   get: get,
   remove: remove,
   list: list,
-  update: update,
-  games: games,
-  characters: characters
+  update: update
 };
 exports["default"] = _default;
