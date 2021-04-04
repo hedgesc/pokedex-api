@@ -17,6 +17,6 @@ var _routes2 = require("../../../middleware/routes");
 
 var router = (0, _express.Router)();
 router.get('/', _controller["default"].list);
-router.use('/:characterId/moves', _routes2.characterIdMiddleware, _routes["default"]);
+router.use('/:id/moves', _routes2.characterIdMiddleware, _routes["default"]);
 var _default = router;
 exports["default"] = _default;

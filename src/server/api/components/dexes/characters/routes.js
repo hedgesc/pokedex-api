@@ -7,6 +7,6 @@ const router = Router()
 
 router.get('/', controller.list)
 
-router.use('/:characterId/moves', characterIdMiddleware, dexCharacterMovesRouter)
+router.use('/:id/moves', characterIdMiddleware, dexCharacterMovesRouter)
 
 export default router
