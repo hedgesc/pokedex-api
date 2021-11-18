@@ -2,4 +2,6 @@
 A Node Express API for pokedex data
 
 ## docker
-`docker build . -t pokedex-api`
+```
+docker build . -t pokedex-api
+```
