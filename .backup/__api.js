@@ -1,20 +1,12 @@
 const Pool = require('pg').Pool
 var _ = require('lodash')
 
-// const pool = new Pool({
-//   user: 'postgres',
-//   host: 'localhost',
-//   database: 'pokedex',
-//   password: 'Super*32',
-//   port: 5432
-// })
-
 const pool = new Pool({
-  user: 'pi',
-  host: '10.0.0.42',
-  database: 'pokedex',
-  password: 'Super*32',
-  port: 5432
+  user: process.env.PGUSER || 'postgres',
+  host: process.env.PGHOST || 'localhost',
+  database: process.env.PGDATABASE || 'pokedex',
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT || 5432
 })
 
 const handleError = (err) => {
