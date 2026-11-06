@@ -32,7 +32,8 @@ const get = async (id) => {
 
 const remove = async (id) => {
   const sql = 'DELETE FROM characters WHERE character_id = $1'
-  await pool.query(sql, [id])
+  const res = await pool.query(sql, [id])
+  if (res.rowCount === 0) return null
   return id
 }
 
@@ -69,7 +70,7 @@ const update = async (id, character) => {
   const sql = 'UPDATE characters \
   SET name_id = $2, name = $3, hp = $4, attack = $5, defense = $6, \
   special_attack = $7, special_defense = $8, speed = $9, total = $10, \
-  image_url = $11, evolves_from_id = $12, gen = $13, types = $14 \
+  image_url = $11, evolves_from_id = $12, gen = $13, types = $14, \
   abilities = $15, pokemon_id = $16 \
   WHERE character_id = $1'
 
@@ -81,7 +82,8 @@ const update = async (id, character) => {
     character.types, character.abilities, character.pokemon_id
   ]
 
-  await pool.query(sql, values)
+  const res = await pool.query(sql, values)
+  if (res.rowCount === 0) return null
   return id
 }
 

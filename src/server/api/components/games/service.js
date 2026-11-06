@@ -9,7 +9,8 @@ import store from './store'
 // }
 
 const create = async (model) => {
-  return await store.create(model)
+  const row = await store.create(model)
+  return { id: row.game_id }
 }
 
 const get = async (id) => {
@@ -18,6 +19,7 @@ const get = async (id) => {
 
 const remove = async (id) => {
   const result = await store.remove(parseInt(id))
+  if (result == null) return null
   return { id: result }
 }
 
@@ -27,6 +29,7 @@ const list = async () => {
 
 const update = async (id, model) => {
   const result = await store.update(parseInt(id), model)
+  if (result == null) return null
   return { id: result }
 }
 

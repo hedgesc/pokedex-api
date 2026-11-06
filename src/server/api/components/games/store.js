@@ -25,7 +25,8 @@ const get = async (id) => {
 
 const remove = async (id) => {
   const sql = 'DELETE FROM dex_games WHERE game_id = $1'
-  await pool.query(sql, [id])
+  const res = await pool.query(sql, [id])
+  if (res.rowCount === 0) return null
   return id
 }
 
@@ -44,7 +45,8 @@ const update = async (id, game) => {
     id, game.dex_id, game.name, game.name_id, game.regions
   ]
 
-  await pool.query(sql, values)
+  const res = await pool.query(sql, values)
+  if (res.rowCount === 0) return null
   return id
 }
 
