@@ -10,7 +10,7 @@ const create = async (move) => {
   VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING move_id'
 
   const values = [
-    move.name, move.name_id, mover.power, move.accuracy,
+    move.name, move.name_id, move.power, move.accuracy,
     move.pp, move.type, move.gen
   ]
 
@@ -26,7 +26,8 @@ const get = async (id) => {
 
 const remove = async (id) => {
   const sql = 'DELETE FROM moves WHERE move_id = $1'
-  await pool.query(sql, [id])
+  const res = await pool.query(sql, [id])
+  if (res.rowCount === 0) return null
   return id
 }
 
@@ -59,7 +60,7 @@ const page = async (limit, offset) => {
   return result
 }
 
-const update = async (id, character) => {
+const update = async (id, move) => {
   const sql = 'UPDATE moves \
   SET name = $2, name_id = $3, power = $4, accuracy = $5, \
   pp = $6, type = $7, gen = $8 \
@@ -70,7 +71,8 @@ const update = async (id, character) => {
     move.accuracy, move.pp, move.type, move.gen
   ]
 
-  await pool.query(sql, values)
+  const res = await pool.query(sql, values)
+  if (res.rowCount === 0) return null
   return id
 }
 
